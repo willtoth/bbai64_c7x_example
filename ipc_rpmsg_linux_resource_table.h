@@ -68,7 +68,11 @@ extern "C" {
 /** \brief Macro to specify linux trace version */
 #define RPMESSAGE_RSC_TRACE_INTS_VER1        (1 << 16)
 /** \brief Max length of trace name */
-#define RPMESSAGE_RSC_TRACE_NAME_LEN         (32u) 
+#define RPMESSAGE_RSC_TRACE_NAME_LEN         (32u)
+
+
+/* flip up bits whose indices represent features we support */
+#define RPMSG_C7X_DSP_FEATURES  1
 
 /**
  * \brief Resource Table Header
@@ -90,7 +94,7 @@ typedef struct
 {
     uint32_t  type;
     /** Type of trace, MUST be set to TYPE_TRACE | TRACE_INTS_VER0 */
-    uint32_t  da;
+    uint32_t da;
     /**< Device Address, physical address of location of trace buffer in remote side */
     uint32_t  len;
     /**< Length of trace buffer  */
