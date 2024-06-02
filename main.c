@@ -1,11 +1,9 @@
 #include <stdint.h>
 #include <string.h>
+#include <c7x.h>
 
 #include "ipc_rpmsg_linux_resource_table.h"
-
-#pragma RETAIN(gDebugMemLog)
-#define DebugP_MEM_LOG_SIZE 1024
-__attribute__((section (".log_shared_mem"))) char gDebugMemLog[DebugP_MEM_LOG_SIZE];
+#include "trace_io.h"
 
 #pragma RETAIN(gRPMessage_linuxResourceTable)
 const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((section (".resource_table"), aligned (4096))) =
@@ -35,9 +33,9 @@ const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((sect
     },
 };
 
-const char* msg = "Hello World!\n";
-
 int main() {
-    strcpy(gDebugMemLog, msg);
+    TRACE_add();
+    printf("Booting\n");
+    runDhrystone();
     return 0;
 }
