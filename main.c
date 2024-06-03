@@ -33,6 +33,13 @@ const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((sect
     },
 };
 
+void InitMmu(void)
+{
+    IpcInitMmu(0);
+    IpcInitMmu(1);
+    //OsalCfgClecAccessCtrl(false);
+}
+
 int main() {
     TRACE_add();
     printf("Booting\n");
