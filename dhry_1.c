@@ -66,7 +66,7 @@ Enumeration     Func_1 ();
 // #define Too_Small_Time (2*HZ)
 // #endif
 
-long            Begin_Time,
+unsigned long   Begin_Time,
                 End_Time,
                 User_Time;
 float           Microseconds,
@@ -141,7 +141,7 @@ runDhrystone ()
   /* Start timer */
   /***************/
  
- Begin_Time = (long) __TSC;
+ Begin_Time = __TSC;
 
   for (Run_Index = 1; Run_Index <= Number_Of_Runs; ++Run_Index)
   {
@@ -193,7 +193,7 @@ runDhrystone ()
   /* Stop timer */
   /**************/
   
-  End_Time = (long) __TSC;
+  End_Time = __TSC;
 
   printf ("Execution ends\n");
   printf ("\n");
@@ -247,6 +247,9 @@ runDhrystone ()
   printf ("Str_2_Loc:           %s\n", Str_2_Loc);
   printf ("        should be:   DHRYSTONE PROGRAM, 2'ND STRING\n");
   printf ("\n");
+  printf ("Begin:           %lu\n", Begin_Time);
+  printf ("End:           %lu\n", End_Time);
+  printf ("Now:           %lu\n", __TSC);
 
   User_Time = End_Time - Begin_Time;
 

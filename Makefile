@@ -15,7 +15,7 @@ clean:
 	rm -f $(APP) *.obj $(APP).lst
 
 $(APP): $(APP_SOURCES) c7x_linker.ld
-	$(C7x_CC) $(APP_SOURCES) $(CFLAGS) -O4 -I=$(TI_CGT_C7x)/include --run_linker --library=c7x_linker.ld --search_path=$(TI_CGT_C7x)/lib --output_file=$(APP)
+	$(C7x_CC) $(APP_SOURCES) $(CFLAGS) -O4 -I=$(TI_CGT_C7x)/include --auto_stream=no_saving --run_linker --library=c7x_linker.ld --search_path=$(TI_CGT_C7x)/lib --output_file=$(APP)
 	# $(CROSS_SIZE) $(APP)
 	$(C7x_OBJDUMP) --all $(APP) > $(APP).lst
 	# sudo cp $(APP) /lib/firmware/

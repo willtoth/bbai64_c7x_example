@@ -4,7 +4,7 @@
 #pragma once
 
 #pragma RETAIN(gDebugMemLog)
-#define DebugP_MEM_LOG_SIZE 10240
+#define DebugP_MEM_LOG_SIZE 2048
 __attribute__((section (".log_shared_mem"))) char gDebugMemLog[DebugP_MEM_LOG_SIZE];
 
 int TRACE_open(const char *path, unsigned flags, int fno) { return 0; }
@@ -30,7 +30,7 @@ int TRACE_write(int fno, const char *data, unsigned size) {
 
 off_t TRACE_lseek(int fno, off_t offset, int origin) { return 0; }
 int TRACE_unlink(const char *path) { return 0; }
-int TRACE_rename(const char *old_name, char *new_name) { return 0; }
+int TRACE_rename(const char *old_name, const char *new_name) { return 0; }
 
 void TRACE_add() {
     add_device("trace_device", _MSA, 
