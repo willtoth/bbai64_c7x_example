@@ -38,6 +38,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <c7x.h>
+#include <stdio.h>
 
 #include <ti/osal/DebugP.h>
 
@@ -242,7 +243,8 @@ void Mmu_enable()
     Cache_disable(Cache_Type_L1D);
 
     /* Invalidate entire TLB */
-    Mmu_tlbInvAll(0);
+    // EDIT: This line reboots the core
+    //Mmu_tlbInvAll(0);
 
     /* enables the MMU */
     mode = Hwi_getCXM();
@@ -524,6 +526,7 @@ void Mmu_startup()
     if (Mmu_enableMMU) {
         mode = Hwi_getCXM();
         if (mode == Hwi_TSR_CXM_SecureSupervisor) {
+            // This line hangs the core
             Mmu_enableI_secure();
         }
         else {
@@ -756,7 +759,7 @@ const Mmu_MapAttrs Mmu_defaultMapAttrs = {
 
 /* enableMMU */
 #pragma DATA_SECTION(Mmu_enableMMU, ".const:Mmu_enableMMU");
-const bool Mmu_enableMMU = 1;
+const bool Mmu_enableMMU = 0; // EDIT: Set to 0, something is not set up right, and initialization fails on startup
 
 /* granuleSize */
 #pragma DATA_SECTION(Mmu_granuleSize, ".const:Mmu_granuleSize");

@@ -4,6 +4,8 @@
 
 #include "ipc_rpmsg_linux_resource_table.h"
 #include "trace_io.h"
+#include "Mmu.h"
+#include "Cache.h"
 
 #pragma RETAIN(gRPMessage_linuxResourceTable)
 const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((section (".resource_table"), aligned (4096))) =
@@ -33,16 +35,27 @@ const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((sect
     },
 };
 
+extern void IpcInitMmu(bool isSecure);
+extern int  _system_pre_init(void);
+int  _system_pre_init(void) {
+    Mmu_startup();
+    Cache_Module_startup();
+    return 1;
+}
+
 void InitMmu(void)
 {
-    IpcInitMmu(0);
-    IpcInitMmu(1);
+    IpcInitMmu(false);
+    IpcInitMmu(true);
     //OsalCfgClecAccessCtrl(false);
 }
 
 int main() {
+    InitMmu();
     TRACE_add();
     printf("Booting\n");
+    Mmu_enable();
+    printf("Ready\n");
     runDhrystone();
     return 0;
 }

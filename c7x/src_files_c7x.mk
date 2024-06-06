@@ -6,5 +6,5 @@ SRCS_COMMON_INTERNAL += boot.c c7x_module_config.c Cache.c Exception.c Hwi.c Int
 SRCS_COMMON_INTERNAL += Mmu_table.c Startup.c
 SRCS_COMMON = $(addprefix $(SRCDIR)/,$(SRCS_COMMON_INTERNAL))
 SRCS_ASM_COMMON = $(addprefix $(SRCDIR)/,$(SRCS_ASM_COMMON_INTERNAL))
-CFLAGS_LOCAL_COMMON += -DHwi_bootToNonSecure__D=true
+CFLAGS_LOCAL_COMMON += -DHwi_bootToNonSecure__D=false # EDIT: Without the OS, running in secure mode
 CFLAGS_LOCAL_COMMON += -DException_vectors__D
