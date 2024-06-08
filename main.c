@@ -53,9 +53,12 @@ void InitMmu(void)
 int main() {
     InitMmu();
     TRACE_add();
-    printf("Booting\n");
+    printf("Booting, SRC: %lx\n", __ECR_SCR);
+    __ECR_SCR |= 0x8000000000000000;
+    printf("Booting, SRC: %lx\n", __ECR_SCR);
     Mmu_enable();
     printf("Ready\n");
-    runDhrystone();
+    //runDhrystone();
+    runLinpack();
     return 0;
 }

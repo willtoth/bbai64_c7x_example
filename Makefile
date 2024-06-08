@@ -1,5 +1,5 @@
 APP ?= main.elf
-APP_SOURCES ?= main.c dhry_1.c dhry_2.c c7x_mmu.c
+APP_SOURCES ?= main.c dhry_1.c dhry_2.c c7x_mmu.c linpack.c
 
 TI_CGT_C7x ?= /home/will/ti-cgt-c7000_4.1.0.LTS
 
@@ -15,7 +15,7 @@ INCLUDE_ALL = $(INCDIR) $(TI_CGT_C7x)/include
 INCLUDES = $(addprefix -I,$(INCLUDE_ALL))
 
 # Taken from PDK
-CFLAGS_INTERNAL = --silicon_version=7100 --abi=eabi -q -mo -pden -pds=238 -pds=880 -pds1110 --endian=little
+CFLAGS_INTERNAL = --silicon_version=7100 --abi=eabi -q -mo -pden -pds=238 -pds=880 -pds1110 --endian=little -O4 --opt_for_speed=5
 LNKFLAGS_INTERNAL_COMMON = -q --warn_sections --diag_suppress=10063 --ram_model
 
 all: $(APP)

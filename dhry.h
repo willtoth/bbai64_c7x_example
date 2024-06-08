@@ -343,6 +343,7 @@
  *
  ***************************************************************************
  */
+#include <stdlib.h>
 
 /* Compiler and system dependent definitions: */
 #define HZ 1000000000
